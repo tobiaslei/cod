@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify
 import requests
 import lxml.html
+from lxml import etree
+import collections
 
 app = Flask(__name__)
 @app.route('/', methods=['POST', 'GET'])
@@ -12,20 +14,29 @@ def parse():
             'xpath': '//*[@id="the-request-object"]/div[2]/div/pre'
         }
     """
-    input_json = request.get_json()
-    if 'url' not in input_json or 'xpath' not in input_json:
-        return jsonify({'status': 'error', 'msg': 'missing url or xpath'})
 
-    page = lxml.html.parse(input_json['url']).getroot()
-    r = page.xpath(input_json['xpath'])
+    if 'url' not in request.form or 'xpath' not in request.form:
+        out = collections.OrderedDict()
+        out['status'] = 'error'
+        out['msg'] = 'missing url or xpath'
+        return jsonify(out)
+
+    res = requests.get(request.form['url'])
+    tree = etree.HTML(res.text)
+    r = tree.xpath(request.form['xpath'])
     out = []
     if isinstance(r, list):
         for i in r:
             out.append(lxml.html.tostring(i).strip())
     else:
-        out.append(lxml.html.tostring(i).strip())
+        out.append(lxml.html.tostring(r).strip())
 
-    return jsonify({'status':'ok', 'result': out})
+    return jsonify(collections.OrderedDict({'status':'ok', 'result': out}))
+
+from flask import render_template
+@app.route('/test')
+def test():
+    return render_template('test.html')
 
 if __name__ == "__main__":
     app.run()
