@@ -1,12 +1,12 @@
 # Cod
 turn any site into a JSON api using xpath
 
-# Install
+### Install
 ```bash
 pip install -r requirements.txt
 ```
 
-# How to use?
+### How to use?
 send the `url` and <a href='https://en.wikipedia.org/wiki/XPath'>`xpath`</a> that you want to crawl to the code server, it will return you the correponding xpath result.
 
 ```javascript
@@ -27,5 +27,5 @@ $(function(){
 ```
 <img src="https://raw.githubusercontent.com/tobiaslei/cod/master/examples.png">
 
-# TODO:
+### TODO
 * Handle ajax rendered pages
