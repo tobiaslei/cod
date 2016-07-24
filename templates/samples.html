@@ -1,0 +1,89 @@
+<html>
+<head>
+<title>Have fun with Cod</title>
+<style>
+a{
+    display: block;
+}
+.result-container{
+    height: 300px;
+    width: 600px;
+    border: 1px solid #ddd;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+</style>
+</head>
+<body>
+
+Useage:
+<pre>
+
+
+$(function(){
+    $.ajax({
+        url: 'http://127.0.0.1:5000/', 
+        type: 'POST',
+        dataType: 'json', 
+        data: {
+            'url': 'https://news.ycombinator.com/', 
+            'xpath': '//*[@class="storylink"]'
+        },
+        success: function(data){
+            $('#result').html(data['result']);
+        }
+        });
+});
+</pre>
+
+<h2>Hacker news feed</h2>
+<pre>
+URL: https://news.ycombinator.com/
+XPATH: //*[@class="storylink"]
+</pre>
+<div id='result' class='result-container'>Loading...</div>
+
+
+<hr>
+<h2>Github: Python requests pulls feed</h2>
+<pre>
+URL: https://github.com/kennethreitz/requests/pulls
+XPATH: //*[contains(@class, "js-issue-row")]
+</pre>
+<div id='github' class='result-container'>Loading...</div>
+
+<div id='imgur' class='result-container'>Loading...</div>
+
+<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+<script>
+function fetch(dict, outDiv){
+    $.ajax({
+        url: 'http://127.0.0.1:8888/', 
+        type: 'POST',
+        dataType: 'json', 
+        data: dict,
+        success: function(data){
+            outDiv.html(data['result']);
+        }
+        });
+}
+
+$(function(){
+
+fetch({'url': 'https://news.ycombinator.com/', 
+       'xpath': '//*[@class="storylink"]'}, 
+       $('#result'))
+
+fetch({'url': 'https://github.com/kennethreitz/requests/pulls', 
+       'xpath': '//*[contains(@class, "js-issue-row")]//a'}, 
+        $('#github'))
+
+});
+
+fetch({'url': 'http://imgur.com',
+       'xpath': '//*[@class="image-list-link"]'},
+       $('#imguar'))
+
+</script>
+</body>
+</html>

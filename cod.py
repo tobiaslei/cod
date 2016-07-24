@@ -29,14 +29,15 @@ def parse():
         for i in r:
             out.append(lxml.html.tostring(i).strip())
     else:
+        print r
         out.append(lxml.html.tostring(r).strip())
 
     return jsonify(collections.OrderedDict({'status':'ok', 'result': out}))
 
 from flask import render_template
-@app.route('/test')
-def test():
-    return render_template('test.html')
+@app.route('/samples')
+def hackernews():
+    return render_template('samples.html')
 
 if __name__ == "__main__":
     app.run()
