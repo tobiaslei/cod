@@ -7,7 +7,12 @@ pip install -r requirements.txt
 ```
 
 ### How to use?
-send the `url` and <a href='https://en.wikipedia.org/wiki/XPath'>`xpath`</a> that you want to crawl to the code server, it will return you the correponding xpath result.
+1. run the code server
+    ```bash
+    python cod_server.py
+    ```
+2. send the `url` and <a href='https://en.wikipedia.org/wiki/XPath'>`xpath`</a> that you want to crawl to the code server, it will return you the correponding xpath result.
+
 
 ```javascript
 $(function(){
