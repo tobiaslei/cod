@@ -16,9 +16,9 @@ a{
 </head>
 <body>
 
-Useage:
 <pre>
-
+用法:
+把網站的URL和對應網頁區域的xpath發給Cod server, 返回結果中的result就是對應網頁區域的html
 
 $(function(){
     $.ajax({
@@ -36,7 +36,7 @@ $(function(){
 });
 </pre>
 
-<h2>Hacker news feed</h2>
+<h2>Example 1: Hacker news feed</h2>
 <pre>
 URL: https://news.ycombinator.com/
 XPATH: //*[@class="storylink"]
@@ -45,14 +45,12 @@ XPATH: //*[@class="storylink"]
 
 
 <hr>
-<h2>Github: Python requests pulls feed</h2>
+<h2>Example 2: douban.com 新書速递 Feed</h2>
 <pre>
-URL: https://github.com/kennethreitz/requests/pulls
-XPATH: //*[contains(@class, "js-issue-row")]
+URL: https://book.douban.com/
+XPATH: //*[contains(@class, "list-col")]/li
 </pre>
 <div id='github' class='result-container'>Loading...</div>
-
-<div id='imgur' class='result-container'>Loading...</div>
 
 <script src="//cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
 <script>
@@ -74,15 +72,11 @@ fetch({'url': 'https://news.ycombinator.com/',
        'xpath': '//*[@class="storylink"]'}, 
        $('#result'))
 
-fetch({'url': 'https://github.com/kennethreitz/requests/pulls', 
-       'xpath': '//*[contains(@class, "js-issue-row")]//a'}, 
+fetch({'url': 'https://book.douban.com/', 
+       'xpath': '//*[contains(@class, "list-col")]/li'}, 
         $('#github'))
 
 });
-
-fetch({'url': 'http://imgur.com',
-       'xpath': '//*[@class="image-list-link"]'},
-       $('#imguar'))
 
 </script>
 </body>
