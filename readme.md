@@ -1,8 +1,14 @@
 # Cod
 turn any site into a JSON api using xpath
 
-# 用法
-把網站的URL和對應網頁區域的xpath發給Cod server, 返回結果中的result就是對應網頁區域的html
+# Install
+```bash
+pip install -r requirements.txt
+```
+
+# How to use?
+send the `url` and <a href='https://en.wikipedia.org/wiki/XPath'>`xpath`</a> that you want to crawl to the code server, it will return you the correponding xpath result.
+
 ```javascript
 $(function(){
     $.ajax({
@@ -22,4 +28,4 @@ $(function(){
 <img src="https://raw.githubusercontent.com/tobiaslei/cod/master/examples.png">
 
 # TODO:
-* 處理動態頁面
+* Handle ajax rendered pages
